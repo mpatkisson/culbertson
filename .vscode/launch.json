@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C#: Culbertson",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}\\src\\Culbertson\\Culbertson.csproj",
+            "launchConfigurationId": "TargetFramework=;Culbertson",
+        },
+        {
+            "name": "C#: Culbertson | Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}
