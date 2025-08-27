@@ -7,8 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta7.25380.108" />
+  </ItemGroup> -->
+
+  <ItemGroup>
+    <Reference Include="System.CommandLine">
+      <HintPath>C:\Users\Mike\Projects\command-line-api\artifacts\bin\System.CommandLine\Debug\netstandard2.0\System.CommandLine.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
