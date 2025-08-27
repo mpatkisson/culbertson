@@ -1,4 +1,4 @@
-# Bug Report
+# OperationCanceledException Not Thrown without Config in Async Apps
 
 [This documentation (published 02 AUG 25) on Learn](https://learn.microsoft.com/en-us/dotnet/standard/commandline/how-to-parse-and-invoke) implies that `System.CommandLine` will, without additional configuration, throw `OperationCanceledException` when `CTRL+C` is pressed allowing library consumers to gracefully handle any necessary cleanup or messaging to end users.
 
@@ -28,7 +28,7 @@ Cleanup complete. Exiting.
 
 ### Actual Behavior
 
-The program _does_ exit when `CTRL+C` is pressed, but `OperationCanceledException` is never thrown, so no cleanup messaging is _not_ displayed.
+The program _does_ exit when `CTRL+C` is pressed, but `OperationCanceledException` is never thrown, so cleanup messaging is _not_ displayed.
 
 ## Further Analysis
 
@@ -56,6 +56,6 @@ public TimeSpan? ProcessTerminationTimeout { get; set; }
 
 ## Possible Fix
 
-My sense is that the default value on `InvocationConfiguration.ProcessTerminationTimeout` got lost in the mix and is [still not fixed in the latest](https://github.com/dotnet/command-line-api/blob/4494d98feedcca2b68177236da02b940b04d2fa3/src/System.CommandLine/InvocationConfiguration.cs#L21).
+My sense is that the default value on `InvocationConfiguration.ProcessTerminationTimeout` got lost in the mix of [3132acb](https://github.com/dotnet/command-line-api/commit/3132acb152db3f00f71d00a9baf93dee12efe771) and is [still not fixed in the latest](https://github.com/dotnet/command-line-api/blob/4494d98feedcca2b68177236da02b940b04d2fa3/src/System.CommandLine/InvocationConfiguration.cs#L21).
 
-Re-adding the default brings behavior around `CTRL+C` back in line with earlier versions and the Learn docs.
+Re-adding the default brings behavior around `CTRL+C` back in line with earlier versions and the Learn docs.  I've tested this small change using [this branch](https://github.com/mpatkisson/command-line-api/tree/resolve-operationcanceledexception-not-thrown-without-config-in-async-apps) with success.
